@@ -1,10 +1,17 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require("path");
 const axios = require("axios");
 const app = express();
 const port = 3030;
 const baseUrl =
   "http://ec2-34-243-153-154.eu-west-1.compute.amazonaws.com:5000";
+
+app.use(express.static(path.resolve(__dirname, "client", "build")));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+});
 
 app.use(bodyParser.json());
 
